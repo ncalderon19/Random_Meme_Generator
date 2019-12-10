@@ -58,15 +58,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 takePicFunction();
-                for (int i = 0; i < 1000; i++);
+                //for (int i = 0; i < 1000; i++);
                 setCaption();
-                for (int i = 0; i < 1000; i++);
-                newCap.setVisibility(View.VISIBLE);
+                //for (int i = 0; i < 1000; i++);
+                setVisibilty();
             }
         });
-
         imageView = findViewById(R.id.imageView);
     }
+
+    private void setVisibilty() {
+        newCap.setVisibility(View.VISIBLE);
+    }
+
 
     private void takePicFunction() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -77,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCaption() {
-        String s = " 1 Did I make your heart skip a beat? 2 New look, same mistakes 3 Who’s a good boy? I am! 4 Life isn’t perfect. But my hair is! 5 Some people grow up, I glow up. 6 This is the most magical picture you’ll ever see 7 How much do I weigh? One hundred and sexy! 9 My dog dared me to take this picture\n" +
-                "I think you are lacking vitamin ME! 10 Reality called, so I hung up. 11 I’ve got it, I’m flaunting it, and you’re liking it. 12 Fresher than you. 13 What do you think of the beautiful view? 14 When a CA responds to your forum post immediately. 15 How I feel after confidently dropping that last CBTF quiz 16 When Challen says no reading on the quiz 17 I woke up like this 8 Just a pic of me being an idiot";
-        int length = 18;
+        String s = " 1 Did I make your heart skip a beat? 2 New look, same mistakes 3 Who’s a good boy? I am! 4 Life isn’t perfect. But my hair is! 5 Some people grow up, I glow up. 6 This is the most magical picture you’ll ever see 7 How much do I weigh? One hundred and sexy!\n" +
+                "10 Reality called, so I hung up. 11 I’ve got it, I’m flaunting it, and you’re liking it. 12 Fresher than you. 13 What do you think of the beautiful view? 14 When a CA responds to your forum post immediately. 15 How I feel after confidently dropping that last CBTF quiz 16 When Challen says no reading on the quiz 9 I woke up like this 8 Just a pic of me being an idiot";
+        int length = 16;
         int num = (int) (Math.random() * (length - 1) + 1);
         int numNext = num + 1;
         String realCappin;
@@ -105,54 +109,4 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
     }
-
-    //Saving the picture
-/**
-    String photoPath;
-
-    private File createImageFile() throws IOException {
-        // Creating the file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        // Creating the file
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
-        // Save a file: path for use with ACTION_VIEW intents
-        photoPath = image.getAbsolutePath();
-        return image;
-    }
-
-    static final int REQUEST_TAKE_PHOTO = 1;
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                System.out.println("oof!");
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
-        }
-    }
-
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(photoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
-    */
  }
